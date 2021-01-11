@@ -3,7 +3,9 @@ main:
   - title: "블로그 방문하기"
     url: https://y2gcoder.github.io
   - title: "Studies"
-    url: /studies/
+    url: /categories/studies/
+  - title: "Categories"
+    url: /categories/
   - title: "About"
     url: /about/
   # - title: "Sample Posts"

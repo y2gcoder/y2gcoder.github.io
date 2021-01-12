@@ -1,6 +1,6 @@
 ---
-title: "Jeus - Http Method restrictions"
-excerpt: "Jeus(Web Server)의 특정 Http Request Method 제한"
+title: "Http Method restrictions"
+excerpt: "Web Server(WebtoB)의 특정 Http Request Method 제한"
 
 categories:
   - Studies

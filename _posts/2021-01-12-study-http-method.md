@@ -13,6 +13,7 @@ tags:
   - Spring Boot
 
 toc: true
+toc_sticky: true
 toc_label: "목차"
 last_modified_at: 2021-01-12T11:09:00-12:00
 ---

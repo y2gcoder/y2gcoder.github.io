@@ -1,7 +1,5 @@
 # main links
 main:
-  - title: "블로그 방문하기"
-    url: https://y2gcoder.github.io
   - title: "Studies"
     url: /categories/studies/
   - title: "Categories"

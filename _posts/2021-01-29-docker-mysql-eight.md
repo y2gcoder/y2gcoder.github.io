@@ -27,9 +27,7 @@ MySQL 8버전부터 기본 인증 모듈이 `mysql_native_password`에서 `cachi
 다음의 명령어를 이용하면 앞서 말한 문제점을 해결하면서 로컬에 설치한 MySQL DB처럼 이용할 수 있다. 
 
 ```bash
-docker run -d --name (컨테이너 이름) -p (호스트 포트):3306 -e mysql:8 
-MYSQL_ROOT_PASSWORD=(root 암호) 
---default-authentication-plugin=mysql_native_password 
+docker run -d --name (컨테이너 이름) -p (호스트 포트):3306 -e MYSQL_ROOT_PASSWORD=(root 암호) -v /(호스트 볼륨 경로):/var/lib/mysql mysql:8 --default-authentication-plugin=mysql_native_password 
 ```
 
 대신 이렇게만 하면 기본적으로 테이블의 기본 character-set이 `latin1`로 설정되어 한글로 된 데이터를 넣을 때 한글이 깨질 수 있다. DB 컨테이너를 만들고 나서 수정하기는 귀찮으므로 `--character-set-server`와 `--collation-server`을 `utf8` 계열로 설정하는 부분도 추가해주면 좋다. 
@@ -37,9 +35,9 @@ MYSQL_ROOT_PASSWORD=(root 암호)
 위에서 도커의 **호스트 볼륨**과 데이터에 **이모티콘**을 넣을 것까지 고려해서 컨테이너를 생성하고 싶다면 다음 명령어를 사용하면 된다. 
 
 ```bash
-docker run -d --name (컨테이너 이름) -p (호스트 포트):3306 
--v /(호스트 볼륨 컴퓨터 경로):/var/lib/mysql mysql:8 
--e MYSQL_ROOT_PASSWORD=(root 암호) 
---default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+docker run -d --name (컨테이너 이름) -p (호스트 포트):3306 -e MYSQL_ROOT_PASSWORD=(root 암호) -v /(호스트 볼륨 경로):/var/lib/mysql mysql:8 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --default-authentication-plugin=mysql_native_password 
 ```
 
+만약 **호스트 볼륨을 삭제하지 않고** 해당 컨테이너를 지우고 새로 컨테이너를 만들 때 삭제하지 않은 호스트 볼륨을 그냥 재사용할 때는 컨테이너 내에서 root 계정 접속 시도 시 `ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)`라는 에러가 발생할 수 있다. 
+
+그러므로 이전의 호스트 볼륨이 필요없다면 꼭 지우고 다시 생성해주자.
